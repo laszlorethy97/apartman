@@ -1,0 +1,26 @@
+# Node modulok
+**/node_modules/
+
+# Build kimenetek
+**/dist/
+**/build/
+
+# Környezeti változók
+**/.env
+**/.env.*
+
+# Angular cache
+.angular/
+
+# NestJS / TypeScript cache
+*.tsbuildinfo
+
+# Logok
+*.log
+
+# VS Code
+.vscode/
+
+# Operációs rendszer fájlok
+.DS_Store
+Thumbs.db
