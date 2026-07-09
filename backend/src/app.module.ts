@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { ReservationModule } from './reservation/reservation.module';
 import { CouponModule } from './coupon/coupon.module';
 import { InvoiceModule } from './invoice/invoice.module';
+import { ApartmanModule } from './apartman/apartman.module';
 
 
 
@@ -18,7 +19,7 @@ import { InvoiceModule } from './invoice/invoice.module';
     username: 'root',
     password: 'Almaspite12*',
     database: 'apartman',
-  }), UserModule, ReservationModule, CouponModule, InvoiceModule],
+  }), UserModule, ReservationModule, CouponModule, InvoiceModule, ApartmanModule],
   controllers: [AppController],
   providers: [AppService],
 })

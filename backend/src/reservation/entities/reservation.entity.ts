@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne , OneToOne, JoinColum
 import { User } from 'src/user/entities/user.entity';
 import { Coupon } from 'src/coupon/entities/coupon.entity';
 import { Invoice } from 'src/invoice/entities/invoice.entity';
+import { Apartman } from 'src/apartman/entities/apartman.entity';
 
 @Entity()
 export class Reservation {
@@ -30,5 +31,8 @@ export class Reservation {
     @OneToOne(()=> Invoice, invoice => invoice.reservation, { nullable: true })
     @JoinColumn()
     invoice!: Invoice | null;
+
+    @ManyToOne(() => Apartman, apartman => apartman.reservations)
+    apartman!: Apartman;
 
 }
