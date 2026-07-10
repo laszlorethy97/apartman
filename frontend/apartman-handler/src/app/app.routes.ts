@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { CommonComponent } from './components/common-component/common-component';
-import { LoginComponent } from './components/login-component/login-component';
 
 
 export const routes: Routes = [
@@ -10,8 +9,12 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                component: LoginComponent,
+                loadComponent: () => import('./components/wellcome-component/wellcome-component').then((m) => m.WellcomeComponent),
             },
+            {
+                path: 'login',
+                loadComponent: () => import('./components/login-component/login-component').then((m) => m.LoginComponent),
+            }
         ]
     }
 ];
