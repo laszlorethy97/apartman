@@ -1,3 +1,39 @@
-@use 'global' as *;
+@use './scss/functions' as utils;
+@use './scss/variables' as vars;
+@use 'sass:list' as list;
 
-/* You can add global styles to this file, and also import other style files */
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  font-family: vars.$default-font;
+  font-size: 16px;
+  $min-font-size: vars.$min-font-size;
+  $max-font-size: vars.$max-font-size;
+  $breakpoints: vars.$breakpoints;
+  //font-size: calc([minimum size]px + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
+  @include utils.media-max(list.nth($breakpoints, 1)){
+    $min-viewport-width: list.nth($breakpoints, 1);
+    font-size: calc( #{ $min-font-size }px + ( #{ $max-font-size - $min-font-size } ) * (100vw / #{ $min-viewport-width }px));
+  }
+  @for $i from 1 through list.length($breakpoints)-1 {
+    $min-viewport-width: list.nth($breakpoints, $i);
+    $max-viewport-width: list.nth($breakpoints, $i+1);
+    @include utils.media-min($min-viewport-width){
+      font-size: calc( #{ $min-font-size }px + ( #{ $max-font-size - $min-font-size } ) * ( ( 100vw - #{ $min-viewport-width }px ) / ( #{ $max-viewport-width - $min-viewport-width } ) ) );
+    }
+  }
+  @include utils.media-min(list.nth($breakpoints, list.length($breakpoints))){
+    $min-viewport-width: list.nth($breakpoints, list.length($breakpoints));
+    font-size: 16px;
+  }
+}
+
+body{
+  margin: 0;
+  font-family: vars.$default-font;
+}
+
+html, body { height: 100%; }

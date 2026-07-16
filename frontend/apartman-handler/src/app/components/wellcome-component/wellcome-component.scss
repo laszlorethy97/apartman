@@ -1,0 +1,124 @@
+@use '../../../scss/global.scss' as utils;
+
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Purple+Purse&family=Tangerine:wght@400;700&display=swap');
+
+.background{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #F8F7F2;
+    overflow: hidden;
+
+    .container{
+        width: 100%;
+        height: 75%;
+        background-color: #445D59;
+        display: flex;
+
+        .green-container{
+            background-color: #445D59;
+            width: 50%;
+            height: 100%;
+            
+            .logo-container{
+                    width: 16.69%;
+                    height: 23.4%;
+                    background-color: black;
+
+                .logo{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .wellcome-container{
+                display: flex;
+                flex-direction: column;
+                justify-content:space-between;
+                align-items: center;
+                width: 60%;
+                height: 50%;
+                margin-left: 23%;
+
+                .wellcome-text{
+                    color: #F8F7F2;
+                    font-size: utils.rem(64);
+                    font-family: "Inter";
+                    font-style: normal;
+                    font-weight:normal;
+                }
+
+                .description{
+                    color: #F8F7F2;
+                    font-size: utils.rem(12);
+                    font-family: "Inter";
+                    font-style: normal;
+                    font-weight:normal;
+                }
+
+                .button{
+                    background-color: transparent;
+                    height: utils.rem(35);
+                    width: utils.rem(76);
+                    color: #F8F7F2;
+                    border: utils.rem(1) solid #F8F7F2;
+                    font-family: "Inter";
+                    font-style: normal;
+                    font-weight:normal;
+
+                    &:hover{
+                        opacity: 0.7;
+                    }
+                }
+            }
+        }
+
+        .picture-container{
+            width: 50%;
+            height: 100%;
+
+            .picture{
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .footer-container{
+        height: 25%;
+        width: 100%;
+        background-color: #F8F7F2;
+        display: flex;
+        justify-content: space-between;
+
+        .left-text-container{
+            height: 100%;
+
+            .left-text{
+                color: #445D59;
+                font-size: utils.rem(40);
+                font-family: "Inter";
+                font-style: normal;
+                font-weight:normal;
+                margin-top: utils.rem(25);
+                margin-left: utils.rem(264);
+            }
+        }
+        
+        .right-text-container{
+            height: 100%;
+
+            .right-text{
+                color: #445D59;
+                font-size: utils.rem(14);
+                font-family: "Inter";
+                font-style: normal;
+                font-weight:normal;
+                margin-top: utils.rem(60);
+                margin-right: utils.rem(30);
+            }
+        } 
+    }
+}
+
