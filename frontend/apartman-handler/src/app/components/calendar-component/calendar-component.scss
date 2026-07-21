@@ -1,0 +1,53 @@
+@use '../../../scss/global.scss' as utils;
+
+.background{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #F8F7F2;
+    width: 100vW;
+    height: 100vh;
+    .next-prev-button-container{
+        display: flex;
+        justify-content: space-between;
+        width: utils.rem(420);
+
+        .arrow-button{
+            background-color: #F8F7F2;
+            border: none;
+            font-size: utils.rem(26);
+            font-family: 900;
+        }
+
+        .year-month-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: utils.rem(30);
+            font-weight: 900;
+        }
+    }
+    .week{
+        display: flex;
+        
+        .day{
+            font-size: utils.rem(24);
+            font-weight: bold;
+            height: utils.rem(100);
+            width: utils.rem(100);
+            background-color: #F8F7F2;
+            display: flex;
+            border: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .red{
+            color: #8B2635;
+        }
+        .green{
+            color: #9FB782;
+        }
+    }
+}

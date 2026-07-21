@@ -1,6 +1,7 @@
 @use './scss/functions' as utils;
 @use './scss/variables' as vars;
 @use 'sass:list' as list;
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Purple+Purse&family=Tangerine:wght@400;700&display=swap');
 
 *{
   margin: 0;
@@ -8,7 +9,9 @@
 }
 
 html{
-  font-family: vars.$default-font;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight:normal;
   font-size: 16px;
   $min-font-size: vars.$min-font-size;
   $max-font-size: vars.$max-font-size;
@@ -18,9 +21,9 @@ html{
     $min-viewport-width: list.nth($breakpoints, 1);
     font-size: calc( #{ $min-font-size }px + ( #{ $max-font-size - $min-font-size } ) * (100vw / #{ $min-viewport-width }px));
   }
-  @for $i from 1 through list.length($breakpoints)-1 {
+  @for $i from 1 through list.length($breakpoints) - 1 {
     $min-viewport-width: list.nth($breakpoints, $i);
-    $max-viewport-width: list.nth($breakpoints, $i+1);
+    $max-viewport-width: list.nth($breakpoints, $i + 1);
     @include utils.media-min($min-viewport-width){
       font-size: calc( #{ $min-font-size }px + ( #{ $max-font-size - $min-font-size } ) * ( ( 100vw - #{ $min-viewport-width }px ) / ( #{ $max-viewport-width - $min-viewport-width } ) ) );
     }
