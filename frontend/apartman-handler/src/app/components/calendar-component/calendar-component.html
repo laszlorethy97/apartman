@@ -1,16 +1,16 @@
 <div class="background">
     <div class="next-prev-button-container">
-        <button class="arrow-button" (click)="getPreviousMonth()">◀ </button>
+        <button class="arrow-button" (click)="prevMonth()">◀ </button>
         <div class="year-month-container">
-            <p>{{calendar[1][2]?.getFullYear()}}</p>
-            <p>{{ calendar[1][2] | date:'MMM':'':'en-US' }}</p>
+            <p>{{currantDate.getFullYear()}}</p>
+            <p>{{currantDate | date:'MMM':'':'en-US'}}</p>
         </div>
-        <button class="arrow-button" (click)="getNextMonth()">▶</button>
+        <button class="arrow-button" (click)="nextMonth()">▶</button>
     </div>
-    <div>
+    <div class="date-container">
         <div class="week" *ngFor="let week of calendar">
             <button 
-            (click)="toggleGreenDates(day!)"
+            (click)="selectDay(day!)"
             class="day"
             [class.red] ="isRed(day)"
             [class.green] = "isGreen(day)"

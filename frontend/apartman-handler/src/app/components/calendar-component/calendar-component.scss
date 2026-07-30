@@ -11,7 +11,8 @@
     .next-prev-button-container{
         display: flex;
         justify-content: space-between;
-        width: utils.rem(420);
+        width: 100%;
+        max-width: utils.rem(290);
 
         .arrow-button{
             background-color: #F8F7F2;
@@ -29,25 +30,32 @@
             font-weight: 900;
         }
     }
-    .week{
+    .date-container{
         display: flex;
-        
-        .day{
-            font-size: utils.rem(24);
-            font-weight: bold;
-            height: utils.rem(100);
-            width: utils.rem(100);
-            background-color: #F8F7F2;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: clamp(utils.rem(10), 2vW, utils.rem(40));
+        .week{
             display: flex;
-            border: none;
-            justify-content: center;
-            align-items: center;
-        }
-        .red{
-            color: #8B2635;
-        }
-        .green{
-            color: #9FB782;
+            flex-wrap: nowrap;
+            gap: clamp(utils.rem(10), 2vW, utils.rem(40));
+            .day{
+                font-size: utils.rem(24);
+                font-weight: bold;
+                flex: 1;
+                background-color: #F8F7F2;
+                display: flex;
+                border: none;
+                justify-content: center;
+                align-items: center;
+            }
+            .red{
+                color: #8B2635;
+            }
+            .green{
+                color: #9FB782;
+            }
         }
     }
+
 }
