@@ -1,7 +1,7 @@
 @use './scss/functions' as utils;
 @use './scss/variables' as vars;
 @use 'sass:list' as list;
-@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Purple+Purse&family=Tangerine:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 *{
   margin: 0;
@@ -34,9 +34,16 @@ html{
   }
 }
 
-body{
+
+
+body {
+  font-family: "Inter";
   margin: 0;
-  font-family: vars.$default-font;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
 }
 
 html, body { height: 100%; }

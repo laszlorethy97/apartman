@@ -1,1 +1,135 @@
 @use '../../../scss/functions' as utils;
+
+.background{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    .left-side{
+        position: relative;
+        background-color: #445D59;
+        height: 100vh;
+        flex: 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .logo{
+            background-image: url('/arnyas-logo.jpeg');
+            position:absolute;
+            top: 0;
+            left: 0;
+            background-size: contain;
+            background-position: top left;
+            background-repeat: no-repeat;
+            width: clamp(utils.rem(40), 8vw, utils.rem(100));
+            height: clamp(utils.rem(50), 8vw, utils.rem(120));
+        }
+        .login{
+            color: #F8F7F2;
+            font-size: utils.rem(50);
+            margin-bottom: clamp(utils.rem(40), 8vw, utils.rem(100));
+        }
+    }
+    .right-side{
+        background-color: #F8F7F2;
+        flex: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .content-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(utils.rem(7), 1vW, utils.rem(10));
+            .username{
+                position: relative;
+                .username-logo{
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    left: utils.rem(4);
+                    background-image: url('/username-kep.png');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: clamp(utils.rem(10), 2vw, utils.rem(20));
+                    height: clamp(utils.rem(10), 2vw, utils.rem(20));
+                }
+                .username-input{
+                    outline: none;
+                    border: utils.rem(1) solid #445D59;
+                    color: #445D59;
+                    padding-left: utils.rem(30);
+                    background-color: transparent;
+                    height: clamp(utils.rem(15), 2vW, utils.rem(30));
+                    width: clamp(utils.rem(100), 15vW, utils.rem(225));
+                    &::placeholder{
+                        color:#445D59;
+
+                    }
+                    &:focus{
+                        &::placeholder{
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+            .password{
+                position: relative;
+                .password-logo{
+                    position:absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    left: utils.rem(6);
+                    background-image: url('/passw-kep.png');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: clamp(utils.rem(10), 2vw, utils.rem(20));
+                    height: clamp(utils.rem(10), 2vw, utils.rem(20));
+                }
+                .password-input{
+                    outline: none;
+                    border: utils.rem(1) solid #445D59;
+                    color: #445D59;
+                    padding-left: utils.rem(30);
+                    background-color: transparent;
+                    height: clamp(utils.rem(15), 2vW, utils.rem(30));
+                    width: clamp(utils.rem(100), 15vW, utils.rem(225));
+                    &::placeholder{
+                        color:#445D59;
+
+                    }
+                    &:focus{
+                        &::placeholder{
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+            .button-container{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                .sing-in{
+                    color: #445D59;
+                    background-color: #F8F7F2;
+                    font-weight: 700;
+                    padding: utils.rem(10);
+                    border: none;
+                    &:hover{
+                        opacity: 0.8;
+                    }
+                }
+                .create-account{
+                    color: #445D59;
+                    background-color: #F8F7F2;
+                    padding: utils.rem(10);
+                    border: none;
+                    &:hover{
+                        opacity: 0.8;
+                    }
+                }
+            }
+        }
+    }
+}

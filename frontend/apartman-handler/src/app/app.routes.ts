@@ -23,6 +23,10 @@ export const routes: Routes = [
             {
                 path: 'calendar',
                 component: CalendarComponent
+            },
+            {
+                path: 'booking-confirmed',
+                loadComponent: () => import('./components/booking-confirmed-component/booking-confirmed-component').then((m) => m.BookingConfirmedComponent)
             }
         ]
     }
