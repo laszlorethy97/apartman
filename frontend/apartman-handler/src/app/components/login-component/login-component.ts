@@ -12,4 +12,8 @@ export class LoginComponent {
   createAccount(){
     this.router.navigate(['create-account']);
   }
+
+  login(){
+    this.router.navigate(['our-story']);
+  }
 }

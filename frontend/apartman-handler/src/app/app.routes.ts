@@ -21,12 +21,24 @@ export const routes: Routes = [
                 loadComponent: () => import('./components/create-account-component/create-account-component').then((m) => m.CreateAccountComponent),
             },
             {
-                path: 'calendar',
-                component: CalendarComponent
+                path: 'booking-confirmed',
+                loadComponent: () => import('./components/booking-confirmed-component/booking-confirmed-component').then((m) => m.BookingConfirmedComponent),
             },
             {
-                path: 'booking-confirmed',
-                loadComponent: () => import('./components/booking-confirmed-component/booking-confirmed-component').then((m) => m.BookingConfirmedComponent)
+                path: 'something-went-wrong',
+                loadComponent: () => import('./components/something-went-wrong-component/something-went-wrong-component').then((m) => m.SomethingWentWrongComponent),
+            },
+            {
+                path: 'our-story',
+                loadComponent: () => import('./components/our-story-component/our-story-component').then((m) => m.OurStoryComponent),
+            },
+            {
+                path: 'booking',
+                loadComponent: () => import('./components/booking-component/booking-component').then((m) => m.BookingComponent),
+            },
+            {
+                path: 'admin',
+                loadComponent: () => import('./components/admin-component/admin-component').then((m) => m.AdminComponent),
             }
         ]
     }

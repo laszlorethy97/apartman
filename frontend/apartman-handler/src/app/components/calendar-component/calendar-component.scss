@@ -1,13 +1,19 @@
 @use '../../../scss/global.scss' as utils;
 
+:host{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .background{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
     background-color: #F8F7F2;
-    width: 100vW;
-    height: 100vh;
     .next-prev-button-container{
         display: flex;
         justify-content: space-between;
@@ -38,16 +44,19 @@
         .week{
             display: flex;
             flex-wrap: nowrap;
+            align-items: center;
             gap: clamp(utils.rem(10), 2vW, utils.rem(40));
             .day{
                 font-size: utils.rem(24);
+                height: clamp(utils.rem(26), 2vW, utils.rem(40));
                 font-weight: bold;
                 flex: 1;
-                background-color: #F8F7F2;
+                background-color: #E8DDD2;
                 display: flex;
                 border: none;
                 justify-content: center;
                 align-items: center;
+                border-radius: utils.rem(6);
             }
             .red{
                 color: #8B2635;

@@ -1,0 +1,123 @@
+@use '../../../scss/global.scss' as utils;
+
+.background{
+    width: 100%;
+    overflow-x: hidden;
+    .header{
+        background-color: #445D59;
+        position: relative;
+        height: clamp(utils.rem(40), 8vw, utils.rem(100));
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        .logo{
+            background-image: url('/arnyas-logo.jpeg');
+            position:absolute;
+            top: 0;
+            left: 0;
+            background-size: contain;
+            background-position: top left;
+            background-repeat: no-repeat;
+            width: clamp(utils.rem(40), 8vw, utils.rem(100));
+            height: clamp(utils.rem(50), 8vw, utils.rem(120));
+        }
+        .title-container{
+            width:clamp(80%, 10vw, 100%);
+            max-width: utils.rem(500);
+            display: flex;
+            gap: clamp(utils.rem(10), 3vw, utils.rem(50));
+            .label{
+                border: none;
+                color: #F8F7F2;
+                background-color: #445D59;
+                font-size: utils.rem(15);
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+    .body{
+        width: 100%;
+        height: calc(100vh - clamp(utils.rem(40), 8vw, utils.rem(100)));
+        overflow-y: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: #F8F7F2;
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #8A9B97;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: #6F8580;
+        }
+        .hello{
+            margin-top: utils.rem(30);
+            font-size: utils.rem(30);
+            font-weight: 500;
+            text-align: center;
+            &:hover{
+                opacity: 0.7;
+            }
+        }
+        .calendar{
+            display:block;
+            width: clamp(utils.rem(300), 60vw, utils.rem(420));
+            height: clamp(utils.rem(320), 60vw, utils.rem(410));
+            border: 1px solid #000;
+            margin-top: utils.rem(30);
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: utils.rem(50);
+            .input-container{
+                position: relative;
+                .icon{
+                    position: absolute;
+                    top: utils.rem(5);
+                    left: utils.rem(3);
+                    background-image: url('/wallet.png');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: clamp(utils.rem(10), 2vw, utils.rem(20));
+                    height: clamp(utils.rem(10), 2vw, utils.rem(20));
+                }
+                .coupon-input{
+                    height: clamp(utils.rem(20), 2vW, utils.rem(30));
+                    width: clamp(utils.rem(150), 15vW, utils.rem(225));
+                    padding-left: utils.rem(25);
+                    background-color: transparent;
+                }
+            }
+            .select{
+                height: clamp(utils.rem(20), 2vW, utils.rem(30));
+                width: clamp(utils.rem(150), 18vW, utils.rem(252));
+                text-align: center;
+                background-color: #F8F7F2;
+                margin-top: utils.rem(10);
+                margin-bottom: utils.rem(30);
+            }
+            .book-button{
+                background-color: transparent;
+                border: none;
+                font-weight: 500;
+                margin-bottom: utils.rem(15);
+                &:hover{
+                    opacity: 0.6;
+                }
+            }
+        }
+    }
+}

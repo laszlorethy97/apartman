@@ -1,0 +1,29 @@
+<div class="background">
+    <div class="header">
+        <div class="logo"></div>
+        <div class="title-container">
+            <button class="label">Our Story</button>
+            <button class="label">Booking</button>
+            <button class="label">AI Chat</button>
+            <button class="label">Edit Data</button>
+        </div>
+    </div>
+    <div class="body">
+        <div class="hello">︎👤︎ {{name}}</div>
+        <app-calendar-component class="calendar"></app-calendar-component>
+        <div class="content">
+            <div class="input-container">
+                <div class="icon"></div>
+                <input type="text" placeholder="Coupon Code" class="coupon-input">
+            </div>
+            <select class="select">
+                <option value="" disabled selected hidden>Head Count</option>
+                <option value="1">1 Person</option>
+                <option value="2">2 People</option>
+                <option value="3">3 People</option>
+                <option value="4">4 People</option>
+            </select>
+            <button class="book-button">Send</button>
+        </div>
+    </div>
+</div>
