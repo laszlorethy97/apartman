@@ -11,7 +11,7 @@ export class Invoice {
     amount!: number;
 
     @Column()
-    issuDate!: Date;
+    issueDate!: Date;
 
     @Column()
     paidAt!: Date;
@@ -21,6 +21,5 @@ export class Invoice {
 
     @OneToOne(() => Reservation, reservation => reservation.invoice)
     reservation!: Reservation;
-
 
 }

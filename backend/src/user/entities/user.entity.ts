@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToMany, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
+import { Entity, Column, ManyToMany, PrimaryGeneratedColumn, OneToMany, JoinTable} from 'typeorm'
 import { Role } from 'src/role/entities/role.entity'
 import { Reservation } from 'src/reservation/entities/reservation.entity';
 
@@ -26,6 +26,7 @@ export class User {
     password!: string;
 
     @ManyToMany(() => Role, role => role.users)
+    @JoinTable()
     roles!: Role[];
 
     @OneToMany(() => Reservation, reservation => reservation.user)

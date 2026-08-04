@@ -8,8 +8,7 @@ import { ReservationModule } from './reservation/reservation.module';
 import { CouponModule } from './coupon/coupon.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ApartmanModule } from './apartman/apartman.module';
-
-
+import { MaintenanceModule } from './maintenance/maintenance.module';
 
 @Module({
   imports: [RoleModule, TypeOrmModule.forRoot({
@@ -19,7 +18,7 @@ import { ApartmanModule } from './apartman/apartman.module';
     username: 'root',
     password: 'Almaspite12*',
     database: 'apartman',
-  }), UserModule, ReservationModule, CouponModule, InvoiceModule, ApartmanModule],
+  }), UserModule, ReservationModule, CouponModule, InvoiceModule, ApartmanModule, MaintenanceModule],
   controllers: [AppController],
   providers: [AppService],
 })

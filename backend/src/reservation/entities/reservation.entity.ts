@@ -16,10 +16,7 @@ export class Reservation {
     endDate!: Date;
 
     @Column()
-    status!: string;
-
-    @Column()
-    isSeason!: boolean;
+    headCount!: number;
 
     @ManyToOne(() => User, user => user.id)
     user!: User;
