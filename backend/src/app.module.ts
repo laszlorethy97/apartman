@@ -18,6 +18,7 @@ import { MaintenanceModule } from './maintenance/maintenance.module';
     username: 'root',
     password: 'Almaspite12*',
     database: 'apartman',
+    autoLoadEntities: true,
   }), UserModule, ReservationModule, CouponModule, InvoiceModule, ApartmanModule, MaintenanceModule],
   controllers: [AppController],
   providers: [AppService],

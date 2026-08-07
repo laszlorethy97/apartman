@@ -1,6 +1,7 @@
 import { Entity, Column, ManyToMany, PrimaryGeneratedColumn, OneToMany, JoinTable} from 'typeorm'
 import { Role } from 'src/role/entities/role.entity'
 import { Reservation } from 'src/reservation/entities/reservation.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -22,6 +23,7 @@ export class User {
     @Column()
     email!: string;
 
+    @Exclude()
     @Column()
     password!: string;
 
