@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ReservationService } from './reservation.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
@@ -7,12 +7,12 @@ import { UpdateReservationDto } from './dto/update-reservation.dto';
 export class ReservationController {
   constructor(private readonly reservationService: ReservationService) {}
 
-  @Post()
-  create(@Body() createReservationDto: CreateReservationDto) {
-    return this.reservationService.create(createReservationDto);
+  @Post('create/:userId')
+  create(@Param('userId', ParseIntPipe) userId: number, @Body() createReservationDto: CreateReservationDto) {
+    return this.reservationService.create(userId, createReservationDto);
   }
 
-  @Get()
+  /*@Get()
   findAll() {
     return this.reservationService.findAll();
   }
@@ -30,5 +30,5 @@ export class ReservationController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.reservationService.remove(+id);
-  }
+  }*/
 }

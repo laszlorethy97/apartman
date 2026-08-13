@@ -1,4 +1,4 @@
-import {IsDateString, IsNumber} from 'class-validator';
+import {IsDateString, IsNumber, IsString} from 'class-validator';
 
 export class CreateReservationDto {
     @IsDateString()
@@ -8,6 +8,9 @@ export class CreateReservationDto {
     endDate!: Date;
 
     @IsNumber()
-    headCount!: Number;
+    headCount!: number;
+
+    @IsString()
+    couponCode!: string;
 }
 

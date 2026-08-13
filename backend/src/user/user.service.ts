@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -47,8 +47,8 @@ export class UserService {
       .leftJoinAndSelect('user.roles', 'role')
       .where('user.userName = :userName', {userName: loginUserDto.userName})
       .getOne();
-      if(user === null) throw new NotFoundException();
-      if(await !bcrypt.compare(loginUserDto.password, user.password)) throw new NotFoundException();
+      if(user === null) throw new UnauthorizedException();
+      if(await !bcrypt.compare(loginUserDto.password, user.password)) throw new UnauthorizedException();
       return user;
   }
 
