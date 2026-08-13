@@ -9,21 +9,27 @@
         </div>
     </div>
     <div class="body">
-        <div class="hello">︎👤︎ {{name}}</div>
-        <app-calendar-component class="calendar"></app-calendar-component>
-        <div class="content">
-            <div class="input-container">
-                <div class="icon"></div>
-                <input type="text" placeholder="Coupon Code" class="coupon-input">
+        <form [formGroup]="reservationGroup" (ngSubmit)="create()">
+            <div class="hello">︎👤︎ {{name}}</div>
+            <app-calendar-component formControlName="calendar" class="calendar"></app-calendar-component>
+            <div class="content">
+                <div class="input-container">
+                    <div class="icon"></div>
+                    <input formControlName="couponCode" type="text" placeholder="Coupon Code" class="coupon-input">
+                </div>
+                <select formControlName="headCount" class="select">
+                    <option value="" disabled selected hidden>Head Count</option>
+                    <option value="1">1 Person</option>
+                    <option value="2">2 People</option>
+                    <option value="3">3 People</option>
+                    <option value="4">4 People</option>
+                </select>
+                <button type="submit" class="book-button">Send</button>
             </div>
-            <select class="select">
-                <option value="" disabled selected hidden>Head Count</option>
-                <option value="1">1 Person</option>
-                <option value="2">2 People</option>
-                <option value="3">3 People</option>
-                <option value="4">4 People</option>
-            </select>
-            <button class="book-button">Send</button>
-        </div>
+        </form>
+        <div *ngIf="isInvalid()" class="error-message">Please fill in all required fields.</div>
+        <div *ngIf="isInvalidDatum()" class="error-message">The selected date is not valid.</div>
+        <div *ngIf="isInvalidCouponOrUser()" class="error-message">The coupon or user could not be found.</div>
+        <div *ngIf="isConcurented()" class="error-message">These dates are no longer available.</div>
     </div>
 </div>

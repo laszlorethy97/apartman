@@ -37,6 +37,7 @@
         justify-content: center;
         align-items: center;
         .content-container{
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -129,6 +130,14 @@
                         opacity: 0.8;
                     }
                 }
+            }
+            .fail-message{
+                position: absolute;
+                text-align: center;
+                top: utils.rem(100);
+                left: utils.rem(40);
+                font-size: utils.rem(12);
+                color: red;
             }
         }
     }

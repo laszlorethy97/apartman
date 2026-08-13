@@ -119,5 +119,10 @@
                 }
             }
         }
+        .error-message{
+            color: red;
+            text-align: center;
+            font-size: utils.rem(12);
+        }
     }
 }

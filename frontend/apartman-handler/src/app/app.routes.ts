@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 import { CommonComponent } from './components/common-component/common-component';
-import { CalendarComponent } from './components/calendar-component/calendar-component';
-
 
 export const routes: Routes = [
     {

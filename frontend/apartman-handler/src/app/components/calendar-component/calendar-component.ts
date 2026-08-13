@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CalendarService } from '../../services/calendar-service';
 
 @Component({
@@ -7,10 +8,40 @@ import { CalendarService } from '../../services/calendar-service';
   imports: [CommonModule],
   templateUrl: './calendar-component.html',
   styleUrl: './calendar-component.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CalendarComponent),
+      multi: true,
+    },
+  ],
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, ControlValueAccessor {
 
   constructor(private calendarService: CalendarService){}
+
+
+  writeValue(date: {startDate: Date, endDate: Date} | null): void {
+    this.calendarService.greenDates = [];
+    if(date){
+      this.calendarService.greenDates.push(date.startDate);
+      this.calendarService.greenDates.push(date.endDate);
+      this.calendarService.createIntervall();
+    }
+  }
+
+  private onChange: (date: {startDate: Date, endDate: Date} | null) => void = () => {};
+
+  registerOnChange(fn: (date:{startDate: Date, endDate: Date} | null) => void): void {
+    this.onChange = fn;
+  }
+
+
+  private onTouched: () => void = () => {};
+  
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
 
   ngOnInit() {
     this.calendarService.init();
@@ -34,6 +65,14 @@ export class CalendarComponent implements OnInit {
 
   selectDay(day: Date){
     this.calendarService.toggleGreenDates(day);
+    this.onTouched();
+    if(this.calendarService.greenDates.length >= 1){
+      const startDate = this.calendarService.greenDates[0];
+      const endDate = this.calendarService.greenDates[this.calendarService.greenDates.length - 1];
+      this.onChange({startDate, endDate});
+    }else{
+      this.onChange(null);
+    }
   }
 
   isGreen(day: Date | null): boolean{

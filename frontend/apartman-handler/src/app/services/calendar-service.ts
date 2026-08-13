@@ -62,12 +62,14 @@ export class CalendarService {
     if(!this.isFuture(day)) return;
     if(this.greenDates.length === 0){
         this.greenDates.push(new Date(day));
+    }else if(this.greenDates.length === 1 && this.isGreen(day)){
+      this.greenDates = [];
     }else if(this.greenDates.length === 1){
-        this.greenDates.push(new Date(day));
-        this.createIntervall();
+      this.greenDates.push(new Date(day));
+      this.createIntervall();
     }else if(!this.isGreen(day)){
-        this.greenDates = [];
-        this.greenDates.push(new Date(day));
+      this.greenDates = [];
+      this.greenDates.push(new Date(day));
     }else{
       this.truncateIntervallAt(day);
     }
@@ -83,7 +85,7 @@ export class CalendarService {
     let temp = new Date(this.greenDates[0]);
     temp.setDate(temp.getDate() + 1);
     const endDate = this.greenDates[this.greenDates.length - 1].getTime()
-    while(temp.getTime() != endDate){
+    while(temp.getTime() < endDate){
       if(this.isRed(temp)){
         this.greenDates = [];
         return;
