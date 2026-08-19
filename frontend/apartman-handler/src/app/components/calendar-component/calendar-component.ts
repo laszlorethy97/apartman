@@ -1,7 +1,10 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, SimpleChanges, inject, DestroyRef, Input, OnChanges, OnInit, forwardRef } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CalendarService } from '../../services/calendar-service';
+import { GetReservationDto } from '../../DTO/reservationDto/get-reservation-dto';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-calendar-component',
@@ -16,7 +19,11 @@ import { CalendarService } from '../../services/calendar-service';
     },
   ],
 })
-export class CalendarComponent implements OnInit, ControlValueAccessor {
+export class CalendarComponent implements OnInit, OnChanges, ControlValueAccessor {
+
+  private destroyRef = inject(DestroyRef);
+  private subscription?: Subscription;
+  @Input() reservations$!: Observable<GetReservationDto[]>;
 
   constructor(private calendarService: CalendarService){}
 
@@ -41,6 +48,15 @@ export class CalendarComponent implements OnInit, ControlValueAccessor {
   
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if(changes['reservations$']){
+      this.subscription?.unsubscribe();
+      this.subscription = this.reservations$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(reservations => {
+          this.calendarService.redDates.set(this.calendarService.expandReservation(reservations));
+      });
+    }
   }
 
   ngOnInit() {

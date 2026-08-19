@@ -11,7 +11,7 @@
     <div class="body">
         <form [formGroup]="reservationGroup" (ngSubmit)="create()">
             <div class="hello">︎👤︎ {{name}}</div>
-            <app-calendar-component formControlName="calendar" class="calendar"></app-calendar-component>
+            <app-calendar-component [reservations$]="reservations$" formControlName="calendar" class="calendar"></app-calendar-component>
             <div class="content">
                 <div class="input-container">
                     <div class="icon"></div>

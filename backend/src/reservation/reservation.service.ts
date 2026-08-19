@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entities/user.entity';
 import { DataSource } from 'typeorm';
 import { Apartman } from 'src/apartman/entities/apartman.entity';
+import { GetReservationDto } from './dto/get-reservation.dto';
 
 
 
@@ -67,6 +68,12 @@ export class ReservationService {
       return false;
     }
     return startDate < endDate || startDate.getTime() === endDate.getTime();
+  }
+
+  public async findAll(): Promise<GetReservationDto[]>{
+    return (await this.reservationRepository.find()).map((res) =>{
+      return {startDate: res.startDate, endDate: res.endDate}
+    });
   }
 
   /*findAll() {

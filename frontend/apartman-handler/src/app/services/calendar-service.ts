@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { signal } from '@angular/core';
+import { GetReservationDto } from '../DTO/reservationDto/get-reservation-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,7 @@ export class CalendarService {
   dayWeekIndex!: number;
   totalDays!: number;
   offset: number = 0;
-  redDates: Date[] = [new Date('2026-07-17'), new Date('2026-07-20'), new Date('2026-08-05')];
+  redDates = signal<Date[]>([]);
   greenDates: Date[] = [];
 
   getActualDate(timeOffset: number) {
@@ -39,7 +41,7 @@ export class CalendarService {
   }
 
   isRed(day: Date | null): boolean{
-    return this.redDates.some(
+    return this.redDates().some(
       rd => rd.getFullYear() === day?.getFullYear()
       && rd.getMonth() === day?.getMonth()
       && rd.getDate() === day?.getDate());
@@ -110,5 +112,22 @@ export class CalendarService {
     this.offset--;
     this.getActualDate(this.offset);
     this.createCalendarMonth();
+  }
+
+  expandReservation(reservations: GetReservationDto[]): Date[]{
+    return reservations.map((item) => {
+      return this.mapDate(item);
+    }).reduce((acc, row) => (acc.concat(row)), []);
+  }
+
+  mapDate(reservation: GetReservationDto): Date[]{
+    const endDate = new Date(reservation.endDate);
+    const dates: Date[] = [];
+    let temp = new Date(reservation.startDate);
+    while(temp <= endDate){
+      dates.push(new Date(temp));
+      temp.setDate(temp.getDate() + 1);
+    }
+    return dates;
   }
 }

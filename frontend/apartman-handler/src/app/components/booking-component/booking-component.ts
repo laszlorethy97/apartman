@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from '../calendar-component/calendar-component';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -25,8 +25,10 @@ export class BookingComponent {
     headCount: new FormControl<null | string>(null, Validators.required)
   });
 
+  private readonly bookingService = inject(BookingService) 
+  reservations$ = this.bookingService.findAll();
+
   constructor(
-    private readonly bookingService: BookingService
   ){}
 
   create(){

@@ -2,21 +2,23 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { ReservationService } from './reservation.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
+import { GetReservationDto } from './dto/get-reservation.dto';
 
 @Controller('reservation')
 export class ReservationController {
   constructor(private readonly reservationService: ReservationService) {}
 
   @Post('create/:userId')
-  create(@Param('userId', ParseIntPipe) userId: number, @Body() createReservationDto: CreateReservationDto) {
+  public async create(@Param('userId', ParseIntPipe) userId: number, @Body() createReservationDto: CreateReservationDto) {
     return this.reservationService.create(userId, createReservationDto);
   }
 
-  /*@Get()
-  findAll() {
+  @Get('find-all')
+  public async findAll(): Promise<GetReservationDto[]>{
     return this.reservationService.findAll();
   }
 
+  /*
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.reservationService.findOne(+id);
