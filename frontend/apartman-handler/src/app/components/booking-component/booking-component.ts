@@ -44,9 +44,9 @@ export class BookingComponent {
       headCount: Number(reservation.headCount),
       couponCode: reservation.couponCode,
     }
-    this.bookingService.create(createReservationDto).subscribe({
+    this.bookingService.createCheckoutSession(createReservationDto).subscribe({
       next: (res) => {
-        console.log(res.id);
+        window.location.href = res.url;
       },
       error: (err) => {
         if(err.status == 400) this.isInvalidDatum.set(true);

@@ -8,29 +8,9 @@ import { GetReservationDto } from './dto/get-reservation.dto';
 export class ReservationController {
   constructor(private readonly reservationService: ReservationService) {}
 
-  @Post('create/:userId')
-  public async create(@Param('userId', ParseIntPipe) userId: number, @Body() createReservationDto: CreateReservationDto) {
-    return this.reservationService.create(userId, createReservationDto);
-  }
-
   @Get('find-all')
   public async findAll(): Promise<GetReservationDto[]>{
     return this.reservationService.findAll();
   }
 
-  /*
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.reservationService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReservationDto: UpdateReservationDto) {
-    return this.reservationService.update(+id, updateReservationDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.reservationService.remove(+id);
-  }*/
 }

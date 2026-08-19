@@ -9,9 +9,11 @@ import { CouponModule } from './coupon/coupon.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ApartmanModule } from './apartman/apartman.module';
 import { MaintenanceModule } from './maintenance/maintenance.module';
+import { PaymentModule } from './payment/payment.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [RoleModule, TypeOrmModule.forRoot({
+  imports: [RoleModule,ConfigModule.forRoot({'isGlobal': true}), TypeOrmModule.forRoot({
     type: 'mysql',
     host: 'localhost',
     port: 3306,
@@ -19,7 +21,7 @@ import { MaintenanceModule } from './maintenance/maintenance.module';
     password: 'Almaspite12*',
     database: 'apartman',
     autoLoadEntities: true,
-  }), UserModule, ReservationModule, CouponModule, InvoiceModule, ApartmanModule, MaintenanceModule],
+  }), UserModule, ReservationModule, CouponModule, InvoiceModule, ApartmanModule, MaintenanceModule, PaymentModule],
   controllers: [AppController],
   providers: [AppService],
 })

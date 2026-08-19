@@ -11,5 +11,6 @@ import { Apartman } from 'src/apartman/entities/apartman.entity';
   imports: [TypeOrmModule.forFeature([Reservation, Coupon, User, Apartman])],
   controllers: [ReservationController],
   providers: [ReservationService],
+  exports: [ReservationService],
 })
 export class ReservationModule {}

@@ -13,9 +13,17 @@ export class BookingService {
   constructor(private readonly httpClient: HttpClient){}
 
 
-  create(createReservationDto: CreateReservationDto): Observable<ReservationResponseDto>{
-    return this.httpClient.post<ReservationResponseDto>
-    ('http://localhost:3000/reservation/create/1', createReservationDto);
+  createCheckoutSession(dto: CreateReservationDto): Observable<{ url: string }> {
+    return this.httpClient.post<{ url: string }>(
+      'http://localhost:3000/payments/checkout-session',
+      dto,
+    );
+  }
+
+  confirmPayment(sessionId: string): Observable<ReservationResponseDto> {
+    return this.httpClient.get<ReservationResponseDto>(
+      `http://localhost:3000/payments/confirm?session_id=${sessionId}`,
+    );
   }
 
   findAll(): Observable<GetReservationDto[]>{
