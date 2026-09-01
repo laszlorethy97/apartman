@@ -2,12 +2,14 @@ import { BadRequestException, ConflictException, Injectable, NotFoundException }
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { Reservation } from './entities/reservation.entity';
 import { Coupon } from 'src/coupon/entities/coupon.entity';
-import { EntityManager, Repository } from 'typeorm';
+import { EntityManager, EntityTarget, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entities/user.entity';
 import { DataSource } from 'typeorm';
 import { Apartman } from 'src/apartman/entities/apartman.entity';
 import { GetReservationDto } from './dto/get-reservation.dto';
+import { Maintenance } from 'src/maintenance/entities/maintenance.entity';
+import { ObjectLiteral } from 'typeorm';
 
 
 
@@ -38,19 +40,26 @@ export class ReservationService {
       await this.datesOverlap(createReservationDto, manager);
       const user = await this.userRepository.findOneBy({id: userId});
       if(!user) throw new NotFoundException();
-      const reservation = this.reservationRepository.create({...createReservationDto, user});
+      const reservation = this.reservationRepository.create({...createReservationDto, user, apartman});
       await this.attachCouponToReservation(createReservationDto.couponCode, reservation);
       return this.reservationRepository.save(reservation);
     });
   }
 
   private async datesOverlap(createReservationDto: CreateReservationDto, manager: EntityManager){
-    const reservation = await manager
-    .createQueryBuilder(Reservation, 'reservation')
-    .where('reservation.startDate <= :endDate', {endDate: createReservationDto.endDate})
-    .andWhere('reservation.endDate >= :startDate', {startDate: createReservationDto.startDate})
+    await this.overlap(createReservationDto, manager, Reservation);
+    await this.overlap(createReservationDto, manager, Maintenance);
+  }
+
+  private async overlap
+  <T extends ObjectLiteral & {startDate: string; endDate: string }>
+  (createReservationDto: CreateReservationDto, manager: EntityManager, object: EntityTarget<T>){
+    const entity = await manager
+    .createQueryBuilder(object, 'object')
+    .where('object.startDate <= :endDate', {endDate: createReservationDto.endDate})
+    .andWhere('object.endDate >= :startDate', {startDate: createReservationDto.startDate})
     .getOne();
-    if(reservation) throw new ConflictException();
+    if(entity) throw new ConflictException();
   }
 
   private async attachCouponToReservation(couponCode: string, reservation: Reservation){
@@ -75,20 +84,4 @@ export class ReservationService {
       return {startDate: res.startDate, endDate: res.endDate}
     });
   }
-
-  /*findAll() {
-    return `This action returns all reservation`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} reservation`;
-  }
-
-  update(id: number, updateReservationDto: UpdateReservationDto) {
-    return `This action updates a #${id} reservation`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} reservation`;
-  }*/
 }

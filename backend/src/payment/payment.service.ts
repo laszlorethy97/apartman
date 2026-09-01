@@ -1,10 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CreateCheckoutSessionDto } from './dto/payment-checkout-session.dto';
 import { BadRequestException } from '@nestjs/common';
 import { CreateReservationDto } from 'src/reservation/dto/create-reservation.dto';
 import { ReservationService } from 'src/reservation/reservation.service';
+import { InjectRepository } from '@nestjs/typeorm';
 import Stripe = require('stripe');
+import { Apartman } from 'src/apartman/entities/apartman.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PaymentService {
@@ -12,7 +15,9 @@ export class PaymentService {
 
     constructor(
         private configService: ConfigService,
-        private readonly reservationService: ReservationService
+        private readonly reservationService: ReservationService,
+        @InjectRepository(Apartman)
+        private readonly apartmanRepository: Repository<Apartman>
     ) {
         const secretKey = this.configService.get<string>('STRIPE_SECRET_KEY');
         if (!secretKey) {
@@ -32,7 +37,7 @@ export class PaymentService {
                 price_data: {
                 currency: 'huf',
                 product_data: { name: 'Apartman foglalás' },
-                unit_amount: unitAmount,
+                unit_amount: await unitAmount,
                 },
                 quantity: 1,
             },
@@ -51,14 +56,19 @@ export class PaymentService {
         return { url: session.url };
     }
 
-    private calculatePrice(startDate: string, endDate: string): number {
+    private async calculatePrice(startDate: string, endDate: string): Promise<number> {
         const days = Math.ceil(
             (new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24),
-        );
-        const pricePerNight = 20000; // ezt majd az Apartman entitásból kellene lekérni
+        ) + 1;
+        const pricePerNight = await this.getApartmanPrice();
         return days * pricePerNight;
     }
 
+    private async getApartmanPrice(): Promise<number>{
+       const apartman = await this.apartmanRepository.findOneBy({id: 1});
+        if(apartman && apartman.price) return apartman.price;
+        throw new NotFoundException();
+    }
 
 
     async confirmPayment(sessionId: string) {
@@ -84,5 +94,4 @@ export class PaymentService {
 
         return this.reservationService.create(userId, dto);
     }
-
 }
