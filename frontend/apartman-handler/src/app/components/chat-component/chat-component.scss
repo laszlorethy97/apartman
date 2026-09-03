@@ -1,0 +1,106 @@
+@use '../../../scss/global.scss' as utils;
+
+.background{
+    height: 100vh;
+    width: 100vw;
+    .header{
+        background-color: #445D59;
+        position: relative;
+        height: clamp(utils.rem(40), 8vw, utils.rem(100));
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        .logo{
+            background-image: url('/arnyas-logo.jpeg');
+            position:absolute;
+            top: 0;
+            left: 0;
+            background-size: contain;
+            background-position: top left;
+            background-repeat: no-repeat;
+            width: clamp(utils.rem(40), 8vw, utils.rem(100));
+            height: clamp(utils.rem(50), 8vw, utils.rem(120));
+        }
+        .title-container{
+            width:clamp(80%, 10vw, 100%);
+            max-width: utils.rem(500);
+            display: flex;
+            gap: clamp(utils.rem(10), 3vw, utils.rem(50));
+            .label{
+                border: none;
+                color: #F8F7F2;
+                background-color: #445D59;
+                font-size: utils.rem(15);
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+    .body{
+        width: 100%;
+        height: calc(100vh - clamp(utils.rem(40), 8vw, utils.rem(100)));
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: #F8F7F2;
+        .chat-window{
+            margin-top: utils.rem(20);
+            width: clamp(utils.rem(260), 50vw, utils.rem(700));
+            height: utils.rem(510);
+            background-color: white;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: #8A9B97;
+                border-radius: 10px;
+            }
+            &::-webkit-scrollbar-thumb:hover {
+                background: #6F8580;
+            }
+
+            .robot-message{
+                background-color: #6F8580;
+            }
+            .human-message{
+                background-color: aquamarine;
+                align-self: flex-end;
+            }
+
+            .robot-message, .human-message{
+                max-width: clamp(utils.rem(210), 50vw, utils.rem(400));
+                width:fit-content;
+                margin: utils.rem(8);
+                padding: utils.rem(3);
+                border-radius: utils.rem(3);
+                word-break:break-all;
+            }
+        }
+        .input-container{
+            margin-top: utils.rem(10);
+            .input-box{
+                height: clamp(utils.rem(20), 2vW, utils.rem(30));
+                width: clamp(utils.rem(210), 50vw, utils.rem(610));
+                padding-left: utils.rem(10);
+                padding-right: utils.rem(10);
+            }
+            .send-button{
+                margin-left: utils.rem(20);
+                background-color: transparent;
+                border: none;
+                font-weight: 500;
+                margin-bottom: utils.rem(15);
+                &:hover{
+                    opacity: 0.6;
+                }
+            }
+        }
+    }
+}
