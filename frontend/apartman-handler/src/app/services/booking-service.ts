@@ -15,18 +15,18 @@ export class BookingService {
 
   createCheckoutSession(dto: CreateReservationDto): Observable<{ url: string }> {
     return this.httpClient.post<{ url: string }>(
-      'http://localhost:3000/payments/checkout-session',
+      '/api/payments/checkout-session',
       dto,
     );
   }
 
   confirmPayment(sessionId: string): Observable<ReservationResponseDto> {
     return this.httpClient.get<ReservationResponseDto>(
-      `http://localhost:3000/payments/confirm?session_id=${sessionId}`,
+      `/api/payments/confirm?session_id=${sessionId}`,
     );
   }
 
   findAll(): Observable<GetReservationDto[]>{
-    return this.httpClient.get<GetReservationDto[]>('http://localhost:3000/reservation/find-all');
+    return this.httpClient.get<GetReservationDto[]>('/api/reservation/find-all');
   }
 }

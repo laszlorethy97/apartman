@@ -1,0 +1,32 @@
+services:
+  client:
+    build: ./frontend/apartman-handler
+    ports:
+      - "80:80"
+
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mysql_db
+      DB_PORT: 3306
+      DB_USERNAME: root
+      DB_PASSWORD: secretpassword
+      DB_NAME: apartmandb
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:?Set STRIPE_SECRET_KEY in your environment}
+    depends_on:
+      - mysql_db
+
+  mysql_db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: secretpassword
+      MYSQL_DATABASE: apartmandb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

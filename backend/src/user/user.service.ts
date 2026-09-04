@@ -33,7 +33,7 @@ export class UserService {
 
   public async create(createUserDto: CreateUserDto): Promise<User>{
     const role = await this.roleRepository.findOneBy({id: 1});
-    if(role === null) throw new InternalServerErrorException();
+    if(!role) throw new InternalServerErrorException();
     if(await this.accountExists(createUserDto)) throw new ConflictException();
     createUserDto.password = await this.createPasswordHash(createUserDto.password);
     const user = this.userRepository.create(createUserDto);

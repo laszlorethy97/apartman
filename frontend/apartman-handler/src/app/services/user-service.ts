@@ -15,10 +15,10 @@ export class UserService {
   ){}
 
   public create(createUserDto: CreateUserDto): Observable<UserResponseDto>{
-    return this.httpClient.post<UserResponseDto>('http://localhost:3000/user/create', createUserDto);
+    return this.httpClient.post<UserResponseDto>('/api/user/create', createUserDto);
   }
 
   public login(loginUserDto: LoginUserDto): Observable<UserResponseDto>{
-    return this.httpClient.post<UserResponseDto>('http://localhost:3000/user/login', loginUserDto);
+    return this.httpClient.post<UserResponseDto>('/api/user/login', loginUserDto);
   }
 }
